@@ -131,6 +131,30 @@
                 <iframe width="560" height="580" src="https://www.youtube.com/embed/Dm89UpFcHVQ?si=Jg-sdgL7nxkouIlj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
+            <!-- 방명록 -->
+            <div id="guestbook" style="margin: 40px auto; padding: 20px; border: 1px solid #ccc; width: 90%; max-width: 600px;">
+                <h3 style="text-align: center;">방명록</h3>
+                <form name="guestbook" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <!-- 스팸 방지용 -->
+                    <input type="hidden" name="form-name" value="guestbook">
+                    <p style="display:none">
+                        <label>Don’t fill this out: <input name="bot-field" /></label>
+                    </p>
+                    <p>
+                        <label>이름<br>
+                        <input type="text" name="name" required style="width: 100%; padding: 8px;"></label>
+                    </p>
+                    <p>
+                        <label>메시지<br>
+                        <textarea name="message" required style="width: 100%; padding: 8px;" rows="4"></textarea></label>
+                    </p>
+                    <p style="text-align: center;">
+                        <button type="submit" style="padding: 10px 20px;">작성</button>
+                    </p>
+                </form>
+            </div>
+
+
             <div id="information1">
                 <a id="copyUrl" href="#" class="copyUrl shadow-small icon icon-round no-border icon-xs bg-tumblr">
                     <i class="fa fa-link font-14 mr-10"></i>
