@@ -131,18 +131,13 @@
                 <iframe width="560" height="580" src="https://www.youtube.com/embed/Dm89UpFcHVQ?si=Jg-sdgL7nxkouIlj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
-            <!-- 방명록 -->
-<!-- const firebaseConfig = {
-            apiKey: "AIzaSyDNF6H_y3DY4G9uQntCnqlNANyFX--tC0Y",
-            authDomain: "guestbook-11b68.firebaseapp.com",
-            projectId: "guestbook-11b68",
-            storageBucket: "guestbook-11b68.firebasestorage.app",
-            messagingSenderId: "908907323574",
-            appId: "1:908907323574:web:af6f74079378d69e088617"
-        }; -->
-            <!-- 방명록 시작 -->
-<div class="container">
-    <h2>환영해요! 방명록입니다</h2>
+             
+                <!-- 방명록 시작 -->
+    <div class="container">
+        <h2>환영해요! 방명록입니다</h2>
+        <div class="visitor-counter" style="text-align: center; font-size: 14px; color: #4caf50; margin-top: 20px;">
+            방문자 수: <span id="visitCount">...</span>명
+        </div>
     <input type="text" id="name" placeholder="이름" />
     <input type="password" id="password" placeholder="비밀번호 (삭제용)" />
     <textarea id="message" placeholder="메시지를 입력해주세요" rows="4"></textarea>
@@ -260,6 +255,25 @@
     }
 
     window.onload = loadComments;
+</script>
+
+<!-- firebase 방문자 수 코드 -->
+
+<script>
+ window.addEventListener('load', () => {
+  const visitCountRef = db.collection("analytics").doc("visits");
+
+  visitCountRef.get().then(doc => {
+    if (doc.exists) {
+      const current = doc.data().count || 0;
+      document.getElementById("visitCount").innerText = current + 1;
+      visitCountRef.update({ count: current + 1 });
+    } else {
+      document.getElementById("visitCount").innerText = 1;
+      visitCountRef.set({ count: 1 });
+    }
+  });
+});
 </script>
 
             <div id="information1">
