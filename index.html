@@ -132,108 +132,143 @@
             </div>
 
             <!-- 방명록 -->
-            <h2>방명록</h2>
-            <div>
-                <input type="text" id="name" placeholder="이름" /><br><br>
-                <input type="password" id="password" placeholder="비밀번호 (삭제용)" /><br><br>
-                <textarea id="message" placeholder="메시지를 입력하세요" rows="4" cols="50"></textarea><br><br>
-                <button onclick="submitComment()">댓글 작성</button>
-            </div>
-
-            <h3>댓글 목록</h3>
-            <div id="commentList"></div>
-            <!-- Firebase SDK -->
-            <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-            <script>
-            // 🔐 여기에 본인의 firebaseConfig 정보로 바꿔주세요
-            const firebaseConfig = {
+<!-- const firebaseConfig = {
             apiKey: "AIzaSyDNF6H_y3DY4G9uQntCnqlNANyFX--tC0Y",
             authDomain: "guestbook-11b68.firebaseapp.com",
             projectId: "guestbook-11b68",
             storageBucket: "guestbook-11b68.firebasestorage.app",
             messagingSenderId: "908907323574",
             appId: "1:908907323574:web:af6f74079378d69e088617"
-            };
+        }; -->
+            <!-- 방명록 시작 -->
+<div class="container">
+    <h2>환영해요! 방명록입니다</h2>
+    <input type="text" id="name" placeholder="이름" />
+    <input type="password" id="password" placeholder="비밀번호 (삭제용)" />
+    <textarea id="message" placeholder="메시지를 입력해주세요" rows="4"></textarea>
+    <button onclick="submitComment()">댓글 작성</button>
+<hr><hr>
+    <h3 style="margin-top: 40px; color: #558b2f;">댓글 목록</h3>
+    <div id="commentList"></div>
+  </div>
 
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            </script>
+  <!-- 비밀번호 입력 모달 -->
+  <div id="passwordModal">
+    <div class="modal-content">
+      <p>비밀번호를 입력해주세요</p>
+      <input type="password" id="modalPassword" />
+      <br>
+      <button onclick="confirmDelete()">삭제</button>
+      <button onclick="closeModal()">취소</button>
+    </div>
+  </div>
 
-            <!-- [4단계] 댓글 작성, 출력, 삭제 로직 추가  -->
-             <script>
-            function submitComment() {
-                const name = document.getElementById('name').value.trim();
-                const message = document.getElementById('message').value.trim();
-                const password = document.getElementById('password').value.trim();
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-                if (!name || !message || !password) {
-                alert("이름, 메시지, 비밀번호를 모두 입력해주세요.");
-                return;
-                }
+  <!-- Firebase Init & Logic -->
+  <script>
+    const firebaseConfig = {
+            apiKey: "AIzaSyDNF6H_y3DY4G9uQntCnqlNANyFX--tC0Y",
+            authDomain: "guestbook-11b68.firebaseapp.com",
+            projectId: "guestbook-11b68",
+            storageBucket: "guestbook-11b68.firebasestorage.app",
+            messagingSenderId: "908907323574",
+            appId: "1:908907323574:web:af6f74079378d69e088617"
+        };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-                db.collection("guestbook").add({
-                name,
-                message,
-                password,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                document.getElementById('name').value = '';
-                document.getElementById('message').value = '';
-                document.getElementById('password').value = '';
-                loadComments();
-                });
-            }
+    let deleteTargetId = null;
 
-            function loadComments() {
-                const container = document.getElementById('commentList');
-                container.innerHTML = '';
+    function submitComment() {
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (!name || !message || !password) {
+        alert("이름, 메시지, 비밀번호를 모두 입력해주세요.");
+        return;
+      }
+      db.collection("guestbook").add({
+        name,
+        message,
+        password: String(password).trim(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById('name').value = '';
+        document.getElementById('message').value = '';
+        document.getElementById('password').value = '';
+        loadComments();
+      });
+    }
+// <div class="delete-area">
+//             </div>
+    function loadComments() {
+      const container = document.getElementById('commentList');
+      container.innerHTML = '';
+      db.collection("guestbook").orderBy("createdAt", "desc").get().then(snapshot => {
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const commentDiv = document.createElement('div');
+          commentDiv.className = 'comment';
+          commentDiv.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 5px;">
+                <span style="font-size: 13px; color: #33691e; font-weight: bold; line-height: 1; margin: 0;">${data.name}</span>
+                <button onclick="openModal('${doc.id}')" style="background:#ef5350;color:white;border:none;border-radius:4px;padding:1px 6px;font-size:11px; line-height: 1;">삭제</button>
+            </div>
+            <br>
 
-                db.collection("guestbook").orderBy("createdAt", "desc").get().then(snapshot => {
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    const commentDiv = document.createElement('div');
-                    commentDiv.className = 'comment';
-                    commentDiv.innerHTML = `
-                    <strong>${data.name}</strong><br>
-                    <p>${data.message}</p>
-                    <input type="password" id="pw-${doc.id}" placeholder="비밀번호 입력" />
-                    <button onclick="deleteComment('${doc.id}')">삭제</button>
-                    `;
-                    container.appendChild(commentDiv);
-                });
-                });
-            }
+            <p style="margin: 0; font-size: 13px; line-height: 1.2;">${data.message}</p>
+            `;
+          container.appendChild(commentDiv);
+        });
+      });
+    }
 
-            function deleteComment(id) {
-                const pwInput = document.getElementById("pw-" + id);
-                const inputPw = pwInput.value;
+    function openModal(id) {
+      deleteTargetId = id;
+      document.getElementById('modalPassword').value = '';
+      document.getElementById('passwordModal').style.display = 'block';
+    }
 
-                db.collection("guestbook").doc(id).get().then(doc => {
-                if (doc.exists && doc.data().password === inputPw) {
-                    db.collection("guestbook").doc(id).delete().then(() => {
-                    alert("댓글이 삭제되었습니다.");
-                    loadComments();
-                    });
-                } else {
-                    alert("비밀번호가 일치하지 않습니다.");
-                }
-                });
-            }
+    function closeModal() {
+      deleteTargetId = null;
+      document.getElementById('passwordModal').style.display = 'none';
+    }
 
-            window.onload = loadComments;
-            </script>
+    function confirmDelete() {
+      const inputPw = document.getElementById('modalPassword').value;
+      if (!inputPw || !deleteTargetId) return;
+      db.collection("guestbook").doc(deleteTargetId).get().then(doc => {
+        if (!doc.exists) {
+          alert("댓글이 존재하지 않습니다.");
+          return;
+        }
 
-            <!-- 여기까지 방명록 -->
-            
+        const savedPw = doc.data().password || "";
+        if (String(savedPw).trim() === String(inputPw).trim()) {
+          db.collection("guestbook").doc(deleteTargetId).delete().then(() => {
+            alert("댓글이 삭제되었습니다.");
+            closeModal();
+            loadComments();
+          });
+        } else {
+          alert("비밀번호가 일치하지 않습니다.");
+        }
+      });
+    }
+
+    window.onload = loadComments;
+</script>
+
             <div id="information1">
                 <a id="copyUrl" href="#" class="copyUrl shadow-small icon icon-round no-border icon-xs bg-tumblr">
                     <i class="fa fa-link font-14 mr-10"></i>
                 </a>
                 <a id="copyUrl" href="#" class="copyText copyUrl nanum-font">링크 복사</a>
                 <div>
-                    <textarea id="url" readonly="">https://newcomer-june.netlify.app/</textarea>
+                    <textarea id="url" readonly="">https://newcomer-june.netlify.app</textarea>
                     <script>
                         $(".copyUrl").click(function () {
                             $("#url").select();
@@ -281,7 +316,7 @@
                 <a href="https://soundcloud.com/wzpjxy1a1xfk" target="_blank" class="shadow-small icon icon-round no-border icon-xs">
                     <img src="img2\logo_soundcloud.jpg" class="sns-logo" />
                 </a>
-                <a href="https://www.instagram.com/fmvyouth/" target="_blank" class="shadow-small icon icon-round no-border icon-xs">
+                <a href="https://www.instagram.com/antioch1k?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="shadow-small icon icon-round no-border icon-xs">
                     <img src="./img2/insta.png" class="sns-logo" />
                 </a>
             </div>
@@ -307,5 +342,3 @@
     </div>
 </body>
 </html>
-
-
