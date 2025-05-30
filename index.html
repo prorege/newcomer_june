@@ -55,38 +55,37 @@
                 <img id="background letter" src="img2/background.png" alt="background" />
             </div>
             <div>
-                <img class="first-part" src="img2/1.png" alt="leap1" />
+                <img class="first-part mt-35" src="img2/1.png" alt="" />
             </div>
             <div>
                 <img class="first-part" src="img2/2.png" alt="" />
             </div>
             <div>
-                <img class="first-part reveal" src="img2/3.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/3.png" alt="" />
             </div>
             <div>
                 <img class="first-part reveal" src="img2/4.png" alt="" />
             </div>
             <div>
-                <img class="first-part reveal" src="img2/5.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/5.png" alt="" />
             </div>
             <div>
                 <img class="first-part reveal" src="img2/6.png" alt="" />
             </div>
             <div>
-                <img class="first-part reveal" src="img2/7.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/7.png" alt="" />
             </div>
             <div>
                 <img class="first-part reveal" src="img2/8.png" alt="" />
             </div>
             <div>
-                    <img class="first-part reveal" src="img2/9.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/9.png" alt="" />
             </div>
             <div>
-                    <img class="first-part reveal" src="img2/10.png" alt="" />
-                </a>    
+                <img class="first-part reveal" src="img2/10.png" alt="" />
             </div>
             <div>
-                    <img class="first-part reveal" src="img2/11.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/11.png" alt="" />
             </div>
             <!-- 14 : 구미, 15: 서울 -->
             <div>
@@ -97,181 +96,172 @@
             </div>
             <div>
                 <a href="https://naver.me/xv3DRTFc" target="_blank">
-                    <img class="first-part reveal" src="img2/14.png" alt="leap1" />
+                    <img class="first-part reveal" src="img2/14.png" alt="" />
                 </a>
             </div>
             <div>
                 <a href="https://naver.me/FgHh36H4" target="_blank">
-                    <img class="first-part reveal" src="img2/15.png" alt="leap1" />
+                    <img class="first-part reveal" src="img2/15.png" alt="" />
                 </a>
             </div>
             <div>
-                <img class="first-part reveal" src="img2/16.png" alt="leap1" />    
+                <img class="first-part reveal" src="img2/16.png" alt="" />
             </div>
             <div>
-                <img class="first-part reveal" src="img2/17.png" alt="leap1" />
+                <img class="first-part reveal" src="img2/17.png" alt="" />
             </div>
             <div>
                 <a href="http://antiochi.org" target="_blank">
-                    <img class="first-part reveal" src="img2/18.png" alt="leap1" />
+                    <img class="first-part reveal" src="img2/18.png" alt="" />
                 </a>
-            </div> 
-            <!-- <div>
-                <img class="first-part reveal" src="img2/19.png" alt="leap1" />
             </div>
-            <div>
-                <img class="first-part reveal" src="img2/20.png" alt="leap1" />
-            </div> -->
 
             <div class="video-container" style="width: 90%;">
                 <iframe width="560" height="580" src="https://www.youtube.com/embed/ck-Dl6Mcq_I?si=sllfEGM6e8sGN45R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <iframe width="560" height="580" src="https://www.youtube.com/embed/Z3nZh5ij0OY?si=We8uqVHtrwTTpOqy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
-             
-                <!-- 방명록 시작 -->
-    <div class="container">
-        <h2>환영해요! 방명록입니다</h2>
-        <div class="visitor-counter" style="text-align: center; font-size: 14px; color: #4caf50; margin-top: 20px;">
-            방문자 수: <span id="visitCount">...</span>명
-        </div>
-    <input type="text" id="name" placeholder="이름" />
-    <input type="password" id="password" placeholder="비밀번호 (삭제용)" />
-    <textarea id="message" placeholder="메시지를 입력해주세요" rows="4"></textarea>
-    <button onclick="submitComment()">댓글 작성</button>
-<hr><hr>
-    <h3 style="margin-top: 40px; color: #558b2f;">댓글 목록</h3>
-    <div id="commentList"></div>
-  </div>
-
-  <!-- 비밀번호 입력 모달 -->
-  <div id="passwordModal">
-    <div class="modal-content">
-      <p>비밀번호를 입력해주세요</p>
-      <input type="password" id="modalPassword" />
-      <br>
-      <button onclick="confirmDelete()">삭제</button>
-      <button onclick="closeModal()">취소</button>
-    </div>
-  </div>
-
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-  <!-- Firebase Init & Logic -->
-  <script>
-    const firebaseConfig = {
-            apiKey: "AIzaSyDNF6H_y3DY4G9uQntCnqlNANyFX--tC0Y",
-            authDomain: "guestbook-11b68.firebaseapp.com",
-            projectId: "guestbook-11b68",
-            storageBucket: "guestbook-11b68.firebasestorage.app",
-            messagingSenderId: "908907323574",
-            appId: "1:908907323574:web:af6f74079378d69e088617"
-        };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    let deleteTargetId = null;
-
-    function submitComment() {
-      const name = document.getElementById('name').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const password = document.getElementById('password').value.trim();
-      if (!name || !message || !password) {
-        alert("이름, 메시지, 비밀번호를 모두 입력해주세요.");
-        return;
-      }
-      db.collection("guestbook").add({
-        name,
-        message,
-        password: String(password).trim(),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById('name').value = '';
-        document.getElementById('message').value = '';
-        document.getElementById('password').value = '';
-        loadComments();
-      });
-    }
-// <div class="delete-area">
-//             </div>
-    function loadComments() {
-      const container = document.getElementById('commentList');
-      container.innerHTML = '';
-      db.collection("guestbook").orderBy("createdAt", "desc").get().then(snapshot => {
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const commentDiv = document.createElement('div');
-          commentDiv.className = 'comment';
-          commentDiv.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 5px;">
-                <span style="font-size: 13px; color: #33691e; font-weight: bold; line-height: 1; margin: 0;">${data.name}</span>
-                <button onclick="openModal('${doc.id}')" style="background:#ef5350;color:white;border:none;border-radius:4px;padding:1px 6px;font-size:11px; line-height: 1;">삭제</button>
+            <!-- 방명록 시작 -->
+            <div class="container">
+                <h2>환영해요! 방명록입니다</h2>
+                <div class="visitor-counter" style="text-align: center; font-size: 14px; color: #4caf50; margin-top: 20px;">
+                    방문자 수: <span id="visitCount">...</span>명
+                </div>
+            <input type="text" id="name" placeholder="이름" />
+            <input type="password" id="password" placeholder="비밀번호 (삭제용)" />
+            <textarea id="message" placeholder="메시지를 입력해주세요" rows="4"></textarea>
+            <button onclick="submitComment()">댓글 작성</button>
+        <hr><hr>
+            <h3 style="margin-top: 40px; color: #558b2f;">댓글 목록</h3>
+            <div id="commentList"></div>
             </div>
-            <br>
 
-            <p style="margin: 0; font-size: 13px; line-height: 1.2;">${data.message}</p>
-            `;
-          container.appendChild(commentDiv);
-        });
-      });
-    }
+            <!-- 비밀번호 입력 모달 -->
+            <div id="passwordModal">
+                <div class="modal-content">
+                <p>비밀번호를 입력해주세요</p>
+                <input type="password" id="modalPassword" />
+                <br>
+                <button onclick="confirmDelete()">삭제</button>
+                <button onclick="closeModal()">취소</button>
+                </div>
+            </div>
 
-    function openModal(id) {
-      deleteTargetId = id;
-      document.getElementById('modalPassword').value = '';
-      document.getElementById('passwordModal').style.display = 'block';
-    }
+            <!-- Firebase SDK -->
+            <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-    function closeModal() {
-      deleteTargetId = null;
-      document.getElementById('passwordModal').style.display = 'none';
-    }
+            <!-- Firebase Init & Logic -->
+            <script>
+                const firebaseConfig = {
+                        apiKey: "AIzaSyDNF6H_y3DY4G9uQntCnqlNANyFX--tC0Y",
+                        authDomain: "guestbook-11b68.firebaseapp.com",
+                        projectId: "guestbook-11b68",
+                        storageBucket: "guestbook-11b68.firebasestorage.app",
+                        messagingSenderId: "908907323574",
+                        appId: "1:908907323574:web:af6f74079378d69e088617"
+                    };
+                firebase.initializeApp(firebaseConfig);
+                const db = firebase.firestore();
 
-    function confirmDelete() {
-      const inputPw = document.getElementById('modalPassword').value;
-      if (!inputPw || !deleteTargetId) return;
-      db.collection("guestbook").doc(deleteTargetId).get().then(doc => {
-        if (!doc.exists) {
-          alert("댓글이 존재하지 않습니다.");
-          return;
-        }
+                let deleteTargetId = null;
 
-        const savedPw = doc.data().password || "";
-        if (String(savedPw).trim() === String(inputPw).trim()) {
-          db.collection("guestbook").doc(deleteTargetId).delete().then(() => {
-            alert("댓글이 삭제되었습니다.");
-            closeModal();
-            loadComments();
-          });
-        } else {
-          alert("비밀번호가 일치하지 않습니다.");
-        }
-      });
-    }
+                function submitComment() {
+                const name = document.getElementById('name').value.trim();
+                const message = document.getElementById('message').value.trim();
+                const password = document.getElementById('password').value.trim();
+                if (!name || !message || !password) {
+                    alert("이름, 메시지, 비밀번호를 모두 입력해주세요.");
+                    return;
+                }
+                db.collection("guestbook").add({
+                    name,
+                    message,
+                    password: String(password).trim(),
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    document.getElementById('name').value = '';
+                    document.getElementById('message').value = '';
+                    document.getElementById('password').value = '';
+                    loadComments();
+                });
+                }
 
-    window.onload = loadComments;
-</script>
+                function loadComments() {
+                const container = document.getElementById('commentList');
+                container.innerHTML = '';
+                db.collection("guestbook").orderBy("createdAt", "desc").get().then(snapshot => {
+                    snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 5px;">
+                            <span style="font-size: 13px; color: #33691e; font-weight: bold; line-height: 1; margin: 0;">${data.name}</span>
+                            <button onclick="openModal('${doc.id}')" style="background:#ef5350;color:white;border:none;border-radius:4px;padding:1px 6px;font-size:11px; line-height: 1;">삭제</button>
+                        </div>
+                        <br>
 
-<!-- firebase 방문자 수 코드 -->
+                        <p style="margin: 0; font-size: 13px; line-height: 1.2;">${data.message}</p>
+                        `;
+                    container.appendChild(commentDiv);
+                    });
+                });
+                }
 
-<script>
- window.addEventListener('load', () => {
-  const visitCountRef = db.collection("analytics").doc("visits");
+                function openModal(id) {
+                deleteTargetId = id;
+                document.getElementById('modalPassword').value = '';
+                document.getElementById('passwordModal').style.display = 'block';
+                }
 
-  visitCountRef.get().then(doc => {
-    if (doc.exists) {
-      const current = doc.data().count || 0;
-      document.getElementById("visitCount").innerText = current + 1;
-      visitCountRef.update({ count: current + 1 });
-    } else {
-      document.getElementById("visitCount").innerText = 1;
-      visitCountRef.set({ count: 1 });
-    }
-  });
-});
-</script>
+                function closeModal() {
+                deleteTargetId = null;
+                document.getElementById('passwordModal').style.display = 'none';
+                }
+
+                function confirmDelete() {
+                const inputPw = document.getElementById('modalPassword').value;
+                if (!inputPw || !deleteTargetId) return;
+                db.collection("guestbook").doc(deleteTargetId).get().then(doc => {
+                    if (!doc.exists) {
+                    alert("댓글이 존재하지 않습니다.");
+                    return;
+                    }
+
+                    const savedPw = doc.data().password || "";
+                    if (String(savedPw).trim() === String(inputPw).trim()) {
+                    db.collection("guestbook").doc(deleteTargetId).delete().then(() => {
+                        alert("댓글이 삭제되었습니다.");
+                        closeModal();
+                        loadComments();
+                    });
+                    } else {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    }
+                });
+                }
+
+                window.onload = loadComments;
+            </script>
+
+            <!-- firebase 방문자 수 코드 -->
+            <script>
+            window.addEventListener('load', () => {
+            const visitCountRef = db.collection("analytics").doc("visits");
+
+            visitCountRef.get().then(doc => {
+                if (doc.exists) {
+                const current = doc.data().count || 0;
+                document.getElementById("visitCount").innerText = current + 1;
+                visitCountRef.update({ count: current + 1 });
+                } else {
+                document.getElementById("visitCount").innerText = 1;
+                visitCountRef.set({ count: 1 });
+                }
+            });
+            });
+            </script>
 
             <div id="information1">
                 <a id="copyUrl" href="#" class="copyUrl shadow-small icon icon-round no-border icon-xs bg-tumblr">
@@ -289,9 +279,7 @@
                     </script>
                 </div>
             </div>
-            
-            
-            
+        
             <div id="information1">
                 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js" integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
                 <script>
@@ -331,14 +319,6 @@
                     <img src="./img2/insta.png" class="sns-logo" />
                 </a>
             </div>
-            <!-- <div class="footer-socials">
-                <img
-              style="width: 50%; margin: 30px auto 0px auto"
-                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fsalvationday-250330.netlify.app&count_bg=%23F64F6C&title_bg=%23EEBEBE&icon=&icon_color=%23E7E7E7&title=%EB%B0%A9%EB%AC%B8%EC%9E%90+%EC%88%98%28%EC%9D%BC%2F%EC%A0%84%EC%B2%B4%29&edge_flat=false"
-            /> 
-            </div> -->
-
-             
 
             <div id="information2" style="width: 70%; margin-top: 30px">
                 <p class="copyText">
