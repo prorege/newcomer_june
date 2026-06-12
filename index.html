@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>안디옥교회 새생명 초청 주일</title>
+
+    <meta property="og:title" content="안디옥교회 새생명 초청 주일">
+    <meta property="og:description" content="안디옥교회 6/29(일)">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://newcomer-june.netlify.app/">
+    <meta property="og:image" content="https://newcomer-june.netlify.app/img/meta.jpg">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="210">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background: #000;
+            overflow-x: hidden;
+        }
+
+        #content-area {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* 레이어 1 (최하단): Background.jpg - 전체 크기 기준 */
+        #bg-bottom {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 레이어 2 (최상단): 버튼, 텍스트, 링크 */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #button-container {
+            position: absolute;
+            top: 1.1%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 10px;
+        }
+
+        .lang-button {
+            width: 21%;
+            max-width: 101px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .lang-button:hover {
+            transform: scale(1.05);
+        }
+
+        .lang-button:active {
+            transform: scale(0.95);
+        }
+
+        /* 배경 원본(860x1807) 기준: 종이 영역 y 649~1523, text 원본 폭 645(=75%) */
+        #text-image {
+            position: absolute;
+            top: 12.2%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            height: auto;
+            max-width: 75%;
+            max-height: 70.5%;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 링크 원본 폭 594(=배경의 69%), 봉투 영역(y 1523~1807) 안에 배치 */
+        #link-container {
+            position: absolute;
+            bottom: 2.9%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 69%;
+        }
+
+        .link-image {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .link-image:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        /* 카카오톡 공유 버튼 */
+        #kakao-share-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: #FEE500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #kakao-share-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        #kakao-share-btn:active {
+            transform: scale(0.95);
+        }
+
+        #kakao-share-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        #loading-spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            z-index: 20;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="content-area">
+        <!-- 레이어 1 (최하단): Background.jpg -->
+        <img id="bg-bottom" src="img/Background.jpg" alt="배경">
+
+        <!-- 레이어 2 (최상단): UI 요소들 -->
+        <div id="ui-layer">
+            <div id="button-container">
+                <img class="lang-button" data-lang="ko" src="img/Button_ko.png" alt="한국어">
+                <img class="lang-button" data-lang="en" src="img/Button_off_en.png" alt="English">
+                <img class="lang-button" data-lang="ja" src="img/Button_off_ja.png" alt="日本語">
+                <img class="lang-button" data-lang="zh" src="img/Button_off_zh.png" alt="中文">
+            </div>
+
+            <img id="text-image" src="img/text_ko.png" alt="텍스트">
+
+            <div id="link-container">
+                <!-- TODO: link1 URL 확정되면 href 교체 -->
+                <a id="link1-anchor" href="#" target="_blank">
+                    <img class="link-image" id="link1" src="img/link1_ko.png" alt="링크 1">
+                </a>
+                <!-- TODO: link2 URL 확정되면 href 교체 -->
+                <a id="link2-anchor" href="#" target="_blank">
+                    <img class="link-image" id="link2" src="img/link2_ko.png" alt="링크 2">
+                </a>
+            </div>
+        </div>
+
+        <div id="loading-spinner"></div>
+    </div>
+
+    <!-- 카카오톡 공유 버튼 -->
+    <button id="kakao-share-btn" onclick="shareKakao()" aria-label="카카오톡 공유">
+        <svg viewBox="0 0 24 24" fill="#3C1E1E">
+            <path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6-.15.56-.96 3.6-.99 3.83 0 0-.02.17.09.23.11.07.24.01.24.01.32-.04 3.7-2.44 4.28-2.86.55.08 1.13.12 1.73.12 5.52 0 10-3.58 10-7.93C22 6.58 17.52 3 12 3z"/>
+        </svg>
+    </button>
+
+    <script>
+        const SITE_URL = 'https://newcomer-june.netlify.app';
+        const META_IMG = SITE_URL + '/img/meta.jpg';
+
+        const langMap = {
+            ko: {
+                text: 'img/text_ko.png',
+                link1: 'img/link1_ko.png',
+                link2: 'img/link2_ko.png',
+                buttonActive: 'img/Button_ko.png',
+                buttonInactive: 'img/Button_off_ko.png'
+            },
+            en: {
+                text: 'img/text_en.png',
+                link1: 'img/link1_en.png',
+                link2: 'img/link2_en.png',
+                buttonActive: 'img/Button_en.png',
+                buttonInactive: 'img/Button_off_en.png'
+            },
+            ja: {
+                text: 'img/text_ja.png',
+                link1: 'img/link1_ja.png',
+                link2: 'img/link2_ja.png',
+                buttonActive: 'img/Button_ja.png',
+                buttonInactive: 'img/Button_off_ja.png'
+            },
+            zh: {
+                text: 'img/text_zh.png',
+                link1: 'img/link1_zh.png',
+                link2: 'img/link2_zh.png',
+                buttonActive: 'img/Button_zh.png',
+                buttonInactive: 'img/Button_off_zh.png'
+            }
+        };
+
+        let currentLang = 'ko';
+
+        function switchLanguage(lang) {
+            if (lang === currentLang) return;
+
+            const spinner = document.getElementById('loading-spinner');
+            const textImg = document.getElementById('text-image');
+            const link1Img = document.getElementById('link1');
+            const link2Img = document.getElementById('link2');
+            const buttons = document.querySelectorAll('.lang-button');
+
+            spinner.style.display = 'block';
+            textImg.style.opacity = '0.5';
+
+            buttons.forEach(btn => {
+                const btnLang = btn.dataset.lang;
+                btn.src = (btnLang === lang)
+                    ? langMap[btnLang].buttonActive
+                    : langMap[btnLang].buttonInactive;
+            });
+
+            const images = [
+                langMap[lang].text,
+                langMap[lang].link1,
+                langMap[lang].link2
+            ];
+
+            let loaded = 0;
+            images.forEach(src => {
+                const img = new Image();
+                img.onload = img.onerror = () => {
+                    loaded++;
+                    if (loaded === images.length) {
+                        textImg.src = langMap[lang].text;
+                        link1Img.src = langMap[lang].link1;
+                        link2Img.src = langMap[lang].link2;
+                        textImg.style.opacity = '1';
+                        spinner.style.display = 'none';
+                        currentLang = lang;
+                    }
+                };
+                img.src = src;
+            });
+        }
+
+        document.querySelectorAll('.lang-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+    </script>
+
+    <!-- 카카오 공유 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+            integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+        // 카카오 SDK 초기화
+        Kakao.init('ed8f68155ced10fddb02e9773436aa2f');
+        console.log('Kakao SDK 초기화:', Kakao.isInitialized());
+
+        // 카카오톡 공유 함수
+        function shareKakao() {
+            Kakao.Share.sendCustom({
+                templateId: 126931,
+            });
+        }
+    </script>
+</body>
+</html>
