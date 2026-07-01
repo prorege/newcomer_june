@@ -2,12 +2,86 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>2026 여름성경학교 | 안디옥교회</title>
-<meta http-equiv="refresh" content="0; url=https://timely-croquembouche-f440a3.netlify.app/">
-<script>location.replace("https://timely-croquembouche-f440a3.netlify.app/");</script>
+
+<!-- 카카오톡/SNS 공유 미리보기 (Open Graph) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026 여름성경학교">
+<meta property="og:description" content="2026.7.23(목)~25(토), 안디옥교회에서 만나요 :)">
+<meta property="og:image" content="https://newcomer-june.netlify.app/vbs/img/meta.png">
+<meta property="og:url" content="https://newcomer-june.netlify.app/vbs/">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8fbf0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; display: flex; justify-content: center; }
+  .frame { width: 100%; max-width: 480px; position: relative; background: url("img/bg.png") center top / 100% auto no-repeat; }
+  .frame img { display: block; width: 100%; height: auto; }
+  a.link-btn { display: block; }
+  a.link-btn:active img { opacity: .7; }
+  .fab { position: fixed; z-index: 50; width: 52px; height: 52px; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  #bgm-toggle { right: 14px; bottom: 14px; background: rgba(0,0,0,.55); color: #fff; font-size: 24px; }
+  #kakao-share { right: 14px; bottom: 78px; background: #FEE500; }
+  #kakao-share svg { width: 26px; height: 26px; }
+</style>
 </head>
 <body>
-<p>여름성경학교 초청장으로 이동 중입니다… <a href="https://timely-croquembouche-f440a3.netlify.app/">여기</a>를 눌러주세요.</p>
+  <div class="frame">
+    <img src="img/1.png" alt="여름성경학교 초대">
+    <img src="img/2.png" alt="일시 / 주제">
+    <img src="img/3.png" alt="초대의 글">
+    <a class="link-btn" href="https://www.antiochi.org/ko" target="_blank" rel="noopener"><img src="img/4.png" alt="안디옥교회 홈페이지 바로가기"></a>
+    <img src="img/5.png" alt="오시는 길 (구미 / 서울)">
+  </div>
+
+  <audio id="bgm" src="bgm.mp3" loop preload="auto" playsinline></audio>
+  <button id="kakao-share" class="fab" aria-label="카카오톡 공유"><svg viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.22 4.65 6.6-.15.56-.96 3.6-.99 3.83 0 0-.02.17.09.23.11.07.24.01.24.01.32-.04 3.7-2.44 4.28-2.86.55.08 1.13.12 1.73.12 5.52 0 10-3.58 10-7.93C22 6.58 17.52 3 12 3z"/></svg></button>
+  <button id="bgm-toggle" class="fab" aria-label="배경음악 켜기/끄기">🔈</button>
+
+  <script>
+    // ===== 배경음악: 음소거 자동재생 후, 첫 터치에 소리 켜기 =====
+    (function () {
+      var audio = document.getElementById('bgm');
+      var btn = document.getElementById('bgm-toggle');
+      function icon() { btn.textContent = (!audio.paused && !audio.muted) ? '🔊' : '🔈'; }
+      audio.muted = true;
+      var k = audio.play(); if (k && k.catch) k.catch(function(){});
+      function turnOn() {
+        audio.muted = false;
+        var p = audio.play();
+        if (p && p.then) { p.then(icon).catch(icon); }
+        icon();
+      }
+      function onFirst() {
+        turnOn();
+        document.removeEventListener('touchend', onFirst);
+        document.removeEventListener('click', onFirst);
+      }
+      document.addEventListener('touchend', onFirst, { passive: true });
+      document.addEventListener('click', onFirst);
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (audio.paused || audio.muted) { audio.muted = false; audio.play(); }
+        else { audio.pause(); }
+        icon();
+      });
+      icon();
+    })();
+  </script>
+
+  <!-- ===== 카카오톡 공유 ===== -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js" integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p" crossorigin="anonymous"></script>
+  <script>
+    var SHARE_URL = 'https://newcomer-june.netlify.app/vbs/';
+    var SHARE_IMG = 'https://newcomer-june.netlify.app/vbs/img/meta.png';
+    try { Kakao.init('ed8f68155ced10fddb02e9773436aa2f'); } catch (e) {}
+    document.getElementById('kakao-share').addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (!window.Kakao || !Kakao.Share) { window.open(SHARE_URL, '_blank'); return; }
+      Kakao.Share.sendCustom({ templateId: 134897 });
+    });
+  </script>
 </body>
 </html>
