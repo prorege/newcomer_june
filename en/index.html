@@ -78,16 +78,7 @@
     document.getElementById('kakao-share').addEventListener('click', function (e) {
       e.stopPropagation();
       if (!window.Kakao || !Kakao.Share) { window.open(SHARE_URL, '_blank'); return; }
-      Kakao.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-          title: '2026 새벗 초청예배',
-          description: '2026년 7월 18일 토요일, 안디옥교회에서 만나요 :)',
-          imageUrl: SHARE_IMG,
-          link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL }
-        },
-        buttons: [ { title: '초대장 확인하기', link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL } } ]
-      });
+      Kakao.Share.sendCustom({ templateId: 134898 });
     });
   </script>
 </body>
